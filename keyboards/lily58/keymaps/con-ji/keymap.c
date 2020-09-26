@@ -142,7 +142,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
 #ifdef OLED_DRIVER_ENABLE
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-  if (!is_master)
+  if (!is_keyboard_master())
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
   return rotation;
 }
@@ -160,7 +160,7 @@ const char *read_keylogs(void);
 // const char *read_timelog(void);
 
 void oled_task_user(void) {
-  if (is_master) {
+  if (is_keyboard_master()) {
     // If you want to change the display of OLED, you need to change here
     oled_write_ln(read_layer_state(), false);
     oled_write_ln(read_keylog(), false);
